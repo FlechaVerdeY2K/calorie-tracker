@@ -17,12 +17,18 @@ class CalorieService {
         .map((snap) {
       double eaten = 0;
       double burned = 0;
+      double protein = 0;
       for (final doc in snap.docs) {
         final data = doc.data();
-        if (data['type'] == 'meal') eaten += data['calories'];
-        if (data['type'] == 'exercise') burned += data['calories'];
+        if (data['type'] == 'meal') {
+          eaten += (data['calories'] as num).toDouble();
+          protein += (data['protein'] as num? ?? 0).toDouble();
+        }
+        if (data['type'] == 'exercise') {
+          burned += (data['calories'] as num).toDouble();
+        }
       }
-      return {'eaten': eaten, 'burned': burned};
+      return {'eaten': eaten, 'burned': burned, 'protein': protein};
     });
   }
 
@@ -44,9 +50,9 @@ class CalorieService {
         userTotals.putIfAbsent(
             uid, () => {'email': data['email'], 'net': 0.0});
         if (data['type'] == 'meal') {
-          userTotals[uid]!['net'] += data['calories'];
+          userTotals[uid]!['net'] += (data['calories'] as num).toDouble();
         } else {
-          userTotals[uid]!['net'] -= data['calories'];
+          userTotals[uid]!['net'] -= (data['calories'] as num).toDouble();
         }
       }
       return userTotals.values.toList();
