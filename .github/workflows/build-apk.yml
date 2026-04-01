@@ -29,6 +29,9 @@ jobs:
       with:
         channel: 'stable'
     
+    - name: Create .env file
+      run: echo "CALORIE_NINJAS_API_KEY=dummy_key_for_build" > .env
+    
     - name: Install dependencies
       run: flutter pub get
     
