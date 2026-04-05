@@ -59,8 +59,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       bmr = (10 * weight) + (6.25 * height) - (5 * age) - 161;
     }
 
-    // Recommended protein: 1.6g per kg of body weight (standard for active people)
-    final protein = weight * 1.6;
+    // Recommended protein: 2.2g per kg of body weight (standard for active people)
+    final protein = weight * 2.2;
 
     setState(() {
       _bmr = bmr;
@@ -193,7 +193,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 color: Colors.blue,
                 label: 'Recommended Protein',
                 value: '${_recommendedProtein.toStringAsFixed(1)}g/day',
-                subtitle: '1.6g per kg body weight',
+                subtitle: '2.2g per kg body weight',
               ),
             ],
 
