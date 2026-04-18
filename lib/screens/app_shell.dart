@@ -6,7 +6,20 @@ import 'package:calorie_tracker/widgets/app_bottom_nav.dart';
 import 'package:flutter/material.dart';
 
 class AppShell extends StatefulWidget {
-  const AppShell({super.key});
+  const AppShell({
+    super.key,
+    this.homeScreen,
+    this.diaryScreen,
+    this.historyScreen,
+    this.profileScreen,
+    this.logEntrySheetChild,
+  });
+
+  final Widget? homeScreen;
+  final Widget? diaryScreen;
+  final Widget? historyScreen;
+  final Widget? profileScreen;
+  final Widget? logEntrySheetChild;
 
   @override
   State<AppShell> createState() => _AppShellState();
@@ -20,9 +33,9 @@ class _AppShellState extends State<AppShell> {
       context: context,
       isScrollControlled: true,
       useSafeArea: true,
-      builder: (_) => const SizedBox(
+      builder: (_) => SizedBox(
         height: 720,
-        child: LogEntryScreen(),
+        child: widget.logEntrySheetChild ?? const LogEntryScreen(),
       ),
     );
   }
@@ -30,10 +43,10 @@ class _AppShellState extends State<AppShell> {
   @override
   Widget build(BuildContext context) {
     final screens = <Widget>[
-      const DashboardScreen(),
-      const _DiaryPlaceholderScreen(),
-      const HistoryScreen(),
-      const ProfileScreen(),
+      widget.homeScreen ?? const DashboardScreen(),
+      widget.diaryScreen ?? const _DiaryPlaceholderScreen(),
+      widget.historyScreen ?? const HistoryScreen(),
+      widget.profileScreen ?? const ProfileScreen(),
     ];
 
     return Scaffold(
