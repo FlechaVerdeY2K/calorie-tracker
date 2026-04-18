@@ -4,12 +4,13 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
+import 'screens/app_shell.dart';
 import 'screens/auth_screen.dart';
-import 'screens/dashboard_screen.dart';
 import 'services/auth_service.dart';
 import 'services/notification_service.dart';
 import 'state/theme_notifier.dart';
 import 'state/unit_system_notifier.dart';
+import 'theme/app_theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,12 +42,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeNotifier = context.watch<ThemeNotifier>();
+
     return MaterialApp(
       title: 'Calorie Tracker',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
-        useMaterial3: true,
-      ),
+      theme: AppTheme.light(),
+      darkTheme: AppTheme.dark(),
+      themeMode: themeNotifier.themeMode,
       home: const RootScreen(),
     );
   }
@@ -58,8 +60,6 @@ class RootScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final auth = context.watch<AuthService>();
-    return auth.currentUser != null
-        ? const DashboardScreen()
-        : const AuthScreen();
+    return auth.currentUser != null ? const AppShell() : const AuthScreen();
   }
 }
