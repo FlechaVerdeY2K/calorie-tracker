@@ -19,10 +19,17 @@ class UnitSystemNotifier extends ChangeNotifier {
   }
 
   Future<void> setUnitSystem(UnitSystem value) async {
-    _unitSystem = value;
+    if (value == _unitSystem) {
+      return;
+    }
 
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('unit_system', value.storageValue);
+    final saved = await prefs.setString('unit_system', value.storageValue);
+    if (!saved) {
+      return;
+    }
+
+    _unitSystem = value;
     notifyListeners();
   }
 }

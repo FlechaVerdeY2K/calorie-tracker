@@ -4,35 +4,68 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-  test('ThemeNotifier loads and saves theme mode', () async {
+  test('ThemeNotifier load notifies once when persisted value changes state',
+      () async {
     SharedPreferences.setMockInitialValues({'theme_mode': 'dark'});
 
     final notifier = ThemeNotifier();
+    var notifications = 0;
+    notifier.addListener(() {
+      notifications++;
+    });
+
     await notifier.load();
 
     expect(notifier.themeMode, ThemeMode.dark);
-
-    await notifier.setThemeMode(ThemeMode.light);
-    final prefs = await SharedPreferences.getInstance();
-    expect(prefs.getString('theme_mode'), 'light');
+    expect(notifications, 1);
   });
 
-  test('ThemeNotifier unknown stored value defaults to system', () async {
-    SharedPreferences.setMockInitialValues({'theme_mode': 'unexpected'});
+  test('ThemeNotifier load does not notify when value is unchanged', () async {
+    SharedPreferences.setMockInitialValues({'theme_mode': 'system'});
 
     final notifier = ThemeNotifier();
+    var notifications = 0;
+    notifier.addListener(() {
+      notifications++;
+    });
+
     await notifier.load();
 
     expect(notifier.themeMode, ThemeMode.system);
+    expect(notifications, 0);
   });
 
-  test('ThemeNotifier persists system mode', () async {
+  test('ThemeNotifier setThemeMode notifies once on a real change', () async {
     SharedPreferences.setMockInitialValues({});
 
     final notifier = ThemeNotifier();
+    var notifications = 0;
+    notifier.addListener(() {
+      notifications++;
+    });
+
+    await notifier.setThemeMode(ThemeMode.dark);
+
+    final prefs = await SharedPreferences.getInstance();
+    expect(notifier.themeMode, ThemeMode.dark);
+    expect(prefs.getString('theme_mode'), 'dark');
+    expect(notifications, 1);
+  });
+
+  test('ThemeNotifier same-value set is a no-op', () async {
+    SharedPreferences.setMockInitialValues({});
+
+    final notifier = ThemeNotifier();
+    var notifications = 0;
+    notifier.addListener(() {
+      notifications++;
+    });
+
     await notifier.setThemeMode(ThemeMode.system);
 
     final prefs = await SharedPreferences.getInstance();
-    expect(prefs.getString('theme_mode'), 'system');
+    expect(notifier.themeMode, ThemeMode.system);
+    expect(prefs.getString('theme_mode'), isNull);
+    expect(notifications, 0);
   });
 }

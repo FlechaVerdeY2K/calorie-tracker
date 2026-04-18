@@ -21,7 +21,9 @@ class ThemeNotifier extends ChangeNotifier {
   }
 
   Future<void> setThemeMode(ThemeMode mode) async {
-    _themeMode = mode;
+    if (mode == _themeMode) {
+      return;
+    }
 
     final prefs = await SharedPreferences.getInstance();
     final value = switch (mode) {
@@ -29,7 +31,12 @@ class ThemeNotifier extends ChangeNotifier {
       ThemeMode.dark => 'dark',
       _ => 'system',
     };
-    await prefs.setString('theme_mode', value);
+    final saved = await prefs.setString('theme_mode', value);
+    if (!saved) {
+      return;
+    }
+
+    _themeMode = mode;
     notifyListeners();
   }
 }
