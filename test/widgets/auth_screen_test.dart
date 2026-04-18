@@ -1,34 +1,59 @@
+import 'package:calorie_tracker/services/auth_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:calorie_tracker/screens/auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:provider/provider.dart';
+
+class FakeAuthService extends ChangeNotifier implements AuthService {
+  var signInCalls = 0;
+  var signUpCalls = 0;
+  var googleSignInCalls = 0;
+
+  @override
+  User? get currentUser => null;
+
+  @override
+  Future<void> signIn(String email, String password) async {
+    signInCalls += 1;
+  }
+
+  @override
+  Future<void> signUp(String email, String password) async {
+    signUpCalls += 1;
+  }
+
+  @override
+  Future<void> signInWithGoogle() async {
+    googleSignInCalls += 1;
+  }
+
+  @override
+  Future<void> signInWithApple() async {}
+
+  @override
+  Future<void> signOut() async {}
+}
 
 void main() {
-  Future<void> pumpAuthScreen(
-    WidgetTester tester, {
-    Future<void> Function(String email, String password, bool isLogin)?
-        onSubmit,
-    Future<void> Function()? onGoogleSignIn,
-  }) async {
+  Future<FakeAuthService> pumpAuthScreen(WidgetTester tester) async {
+    final auth = FakeAuthService();
+
     await tester.pumpWidget(
-      MaterialApp(
-        home: AuthScreen(
-          onSubmit: onSubmit,
-          onGoogleSignIn: onGoogleSignIn,
+      ChangeNotifierProvider<AuthService>.value(
+        value: auth,
+        child: const MaterialApp(
+          home: AuthScreen(),
         ),
       ),
     );
+
+    return auth;
   }
 
   testWidgets('auth screen shows hero, form, and social actions',
       (tester) async {
-    var googleTapped = 0;
-
-    await pumpAuthScreen(
-      tester,
-      onGoogleSignIn: () async {
-        googleTapped += 1;
-      },
-    );
+    final auth = await pumpAuthScreen(tester);
 
     expect(find.text('Know what you eat. Own your goals.'), findsOneWidget);
     expect(find.text('Sign In'), findsOneWidget);
@@ -38,19 +63,12 @@ void main() {
     await tester.tap(find.text('Continue with Google'));
     await tester.pump();
 
-    expect(googleTapped, 1);
+    expect(auth.googleSignInCalls, 1);
   });
 
   testWidgets('sign-up mode shows confirm password and blocks mismatch submit',
       (tester) async {
-    var submitCalls = 0;
-
-    await pumpAuthScreen(
-      tester,
-      onSubmit: (email, password, isLogin) async {
-        submitCalls += 1;
-      },
-    );
+    final auth = await pumpAuthScreen(tester);
 
     await tester.tap(find.text("Don't have an account? Create one"));
     await tester.pump();
@@ -66,7 +84,7 @@ void main() {
     await tester.pump();
 
     expect(find.text('Passwords do not match.'), findsOneWidget);
-    expect(submitCalls, 0);
+    expect(auth.signUpCalls, 0);
   });
 
   testWidgets('password visibility toggle updates the password field',

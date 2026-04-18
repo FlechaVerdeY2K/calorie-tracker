@@ -3,15 +3,7 @@ import 'package:provider/provider.dart';
 import '../services/auth_service.dart';
 
 class AuthScreen extends StatefulWidget {
-  const AuthScreen({
-    super.key,
-    this.onSubmit,
-    this.onGoogleSignIn,
-  });
-
-  final Future<void> Function(String email, String password, bool isLogin)?
-      onSubmit;
-  final Future<void> Function()? onGoogleSignIn;
+  const AuthScreen({super.key});
 
   @override
   State<AuthScreen> createState() => _AuthScreenState();
@@ -42,19 +34,11 @@ class _AuthScreenState extends State<AuthScreen> {
     }
 
     try {
-      if (widget.onSubmit != null) {
-        await widget.onSubmit!(
-          _emailController.text,
-          password,
-          _isLogin,
-        );
+      final auth = context.read<AuthService>();
+      if (_isLogin) {
+        await auth.signIn(_emailController.text, password);
       } else {
-        final auth = context.read<AuthService>();
-        if (_isLogin) {
-          await auth.signIn(_emailController.text, password);
-        } else {
-          await auth.signUp(_emailController.text, password);
-        }
+        await auth.signUp(_emailController.text, password);
       }
     } catch (e) {
       setState(() => _error = e.toString());
@@ -198,10 +182,6 @@ class _AuthScreenState extends State<AuthScreen> {
                                   Expanded(
                                     child: OutlinedButton.icon(
                                       onPressed: () async {
-                                        if (widget.onGoogleSignIn != null) {
-                                          await widget.onGoogleSignIn!();
-                                          return;
-                                        }
                                         await context
                                             .read<AuthService>()
                                             .signInWithGoogle();
