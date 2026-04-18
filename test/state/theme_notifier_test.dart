@@ -16,4 +16,23 @@ void main() {
     final prefs = await SharedPreferences.getInstance();
     expect(prefs.getString('theme_mode'), 'light');
   });
+
+  test('ThemeNotifier unknown stored value defaults to system', () async {
+    SharedPreferences.setMockInitialValues({'theme_mode': 'unexpected'});
+
+    final notifier = ThemeNotifier();
+    await notifier.load();
+
+    expect(notifier.themeMode, ThemeMode.system);
+  });
+
+  test('ThemeNotifier persists system mode', () async {
+    SharedPreferences.setMockInitialValues({});
+
+    final notifier = ThemeNotifier();
+    await notifier.setThemeMode(ThemeMode.system);
+
+    final prefs = await SharedPreferences.getInstance();
+    expect(prefs.getString('theme_mode'), 'system');
+  });
 }

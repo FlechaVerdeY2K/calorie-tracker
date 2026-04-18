@@ -16,4 +16,11 @@ void main() {
     expect(feet, 5);
     expect(inches, 11);
   });
+
+  test('metersToFeetInches carries over at the exact foot boundary', () {
+    final (feet, inches) = metersToFeetInches(1.8288);
+
+    expect(feet, 6);
+    expect(inches, 0);
+  });
 }

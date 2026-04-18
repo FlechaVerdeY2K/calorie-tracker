@@ -15,4 +15,13 @@ void main() {
     final prefs = await SharedPreferences.getInstance();
     expect(prefs.getString('unit_system'), 'imperial');
   });
+
+  test('UnitSystemNotifier unexpected stored value defaults to metric', () async {
+    SharedPreferences.setMockInitialValues({'unit_system': 'unexpected'});
+
+    final notifier = UnitSystemNotifier();
+    await notifier.load();
+
+    expect(notifier.unitSystem, UnitSystem.metric);
+  });
 }
