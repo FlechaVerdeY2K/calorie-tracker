@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/edgarherrera/.claude/plugins/**)",
+      "Bash(bash \"/Users/edgarherrera/.claude/plugins/cache/superpowers-dev/superpowers/5.0.7/scripts/start-server.sh\" --project-dir /Users/edgarherrera/MyApps/calorie-tracker)",
+      "Bash(bash \"/Users/edgarherrera/.claude/plugins/cache/superpowers-dev/superpowers/5.0.7/skills/brainstorming/scripts/start-server.sh\" --project-dir /Users/edgarherrera/MyApps/calorie-tracker)",
+      "Bash(python3 \"/Users/edgarherrera/.claude/plugins/cache/ui-ux-pro-max-skill/ui-ux-pro-max/2.5.0/.claude/skills/ui-ux-pro-max/scripts/search.py\" \"health fitness calorie tracker nutrition mobile modern motivational\" --design-system -p \"CalorieTracker\" -f markdown)",
+      "Bash(python3 \"/Users/edgarherrera/.claude/plugins/cache/ui-ux-pro-max-skill/ui-ux-pro-max/2.5.0/.claude/skills/ui-ux-pro-max/scripts/search.py\" \"fitness calorie tracker\" --stack react-native)"
+    ]
+  }
+}

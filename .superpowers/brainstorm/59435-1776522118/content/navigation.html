@@ -1,0 +1,160 @@
+<h2>How should the app navigate?</h2>
+<p class="subtitle">The current app uses push navigation from a dashboard + FAB. These are the three strongest patterns for a fitness tracker.</p>
+
+<div class="cards">
+
+  <!-- Option A: Center FAB tab bar (MyFitnessPal style) -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="background: #F0F8F6; padding: 20px; display: flex; justify-content: center;">
+      <div style="background: #fff; border-radius: 20px; width: 200px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); overflow: hidden;">
+        <!-- Screen -->
+        <div style="padding: 16px; min-height: 140px; background: #fff;">
+          <div style="font-size: 13px; font-weight: 700; color: #0F172A; margin-bottom: 8px;">Dashboard</div>
+          <div style="background: #ECFDF5; border-radius: 12px; padding: 10px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+            <div style="font-size: 10px; color: #6b7280;">Net Calories</div>
+            <div style="font-size: 16px; font-weight: 800; color: #059669;">1,840</div>
+          </div>
+          <div style="display: flex; gap: 6px;">
+            <div style="flex:1; background: #FFF7ED; border-radius: 8px; padding: 8px; text-align: center;">
+              <div style="font-size: 9px; color: #EA580C;">Eaten</div>
+              <div style="font-size: 12px; font-weight: 700; color: #0F172A;">1,420</div>
+            </div>
+            <div style="flex:1; background: #ECFDF5; border-radius: 8px; padding: 8px; text-align: center;">
+              <div style="font-size: 9px; color: #059669;">Burned</div>
+              <div style="font-size: 12px; font-weight: 700; color: #0F172A;">380</div>
+            </div>
+          </div>
+        </div>
+        <!-- Bottom nav with center FAB -->
+        <div style="border-top: 1px solid #e5e7eb; padding: 0 8px; display: flex; align-items: center; justify-content: space-around; position: relative; height: 52px;">
+          <div style="text-align: center;">
+            <div style="font-size: 16px;">🏠</div>
+            <div style="font-size: 7px; color: #059669; font-weight: 700;">Home</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-size: 16px;">📊</div>
+            <div style="font-size: 7px; color: #9ca3af;">History</div>
+          </div>
+          <!-- Center FAB -->
+          <div style="width: 44px; height: 44px; background: #059669; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: -22px; box-shadow: 0 4px 12px rgba(5,150,105,0.4);">
+            <div style="color: #fff; font-size: 22px; line-height: 1;">+</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-size: 16px;">🍎</div>
+            <div style="font-size: 7px; color: #9ca3af;">Foods</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-size: 16px;">👤</div>
+            <div style="font-size: 7px; color: #9ca3af;">Profile</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Center "+" Tab Bar</h3>
+      <p>4 tabs + prominent center button for logging. Like MyFitnessPal, Instagram. Primary action always visible. <strong>Best discoverability.</strong></p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul><li>Log action always reachable</li><li>Clear hierarchy</li><li>Familiar pattern</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Center button = 5 slots used</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Option B: Standard 4-tab bottom nav -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="background: #F0F8F6; padding: 20px; display: flex; justify-content: center;">
+      <div style="background: #fff; border-radius: 20px; width: 200px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); overflow: hidden;">
+        <div style="padding: 16px; min-height: 140px; background: #fff;">
+          <div style="font-size: 13px; font-weight: 700; color: #0F172A; margin-bottom: 8px;">Dashboard</div>
+          <div style="background: #ECFDF5; border-radius: 12px; padding: 10px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+            <div style="font-size: 10px; color: #6b7280;">Net Calories</div>
+            <div style="font-size: 16px; font-weight: 800; color: #059669;">1,840</div>
+          </div>
+          <div style="display: flex; gap: 6px;">
+            <div style="flex:1; background: #FFF7ED; border-radius: 8px; padding: 8px; text-align: center;">
+              <div style="font-size: 9px; color: #EA580C;">Eaten</div>
+              <div style="font-size: 12px; font-weight: 700; color: #0F172A;">1,420</div>
+            </div>
+            <div style="flex:1; background: #ECFDF5; border-radius: 8px; padding: 8px; text-align: center;">
+              <div style="font-size: 9px; color: #059669;">Burned</div>
+              <div style="font-size: 12px; font-weight: 700; color: #0F172A;">380</div>
+            </div>
+          </div>
+        </div>
+        <!-- Standard 4-tab nav -->
+        <div style="border-top: 1px solid #e5e7eb; padding: 8px; display: flex; align-items: center; justify-content: space-around; height: 52px;">
+          <div style="text-align: center;">
+            <div style="font-size: 16px;">🏠</div>
+            <div style="font-size: 7px; color: #059669; font-weight: 700;">Home</div>
+          </div>
+          <div style="text-align: center; background: #059669; border-radius: 20px; padding: 4px 10px;">
+            <div style="font-size: 14px;">➕</div>
+            <div style="font-size: 7px; color: #fff; font-weight: 700;">Log</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-size: 16px;">📊</div>
+            <div style="font-size: 7px; color: #9ca3af;">History</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-size: 16px;">👤</div>
+            <div style="font-size: 7px; color: #9ca3af;">Profile</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — 4-Tab Bar with Highlighted Log</h3>
+      <p>Home · Log · History · Profile. Log tab is pill-styled with green background. Clean, no cutout needed. Simple to build.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul><li>Simple, flat structure</li><li>Easy to extend later</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Log is less prominent than FAB</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Option C: Dashboard + FAB (current pattern, improved) -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="background: #F0F8F6; padding: 20px; display: flex; justify-content: center;">
+      <div style="background: #fff; border-radius: 20px; width: 200px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); overflow: hidden; position: relative;">
+        <div style="padding: 16px; min-height: 140px; background: #fff;">
+          <div style="font-size: 13px; font-weight: 700; color: #0F172A; margin-bottom: 8px;">Dashboard</div>
+          <div style="background: #ECFDF5; border-radius: 12px; padding: 10px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+            <div style="font-size: 10px; color: #6b7280;">Net Calories</div>
+            <div style="font-size: 16px; font-weight: 800; color: #059669;">1,840</div>
+          </div>
+          <div style="display: flex; gap: 6px;">
+            <div style="flex:1; background: #FFF7ED; border-radius: 8px; padding: 8px; text-align: center;">
+              <div style="font-size: 9px; color: #EA580C;">Eaten</div>
+              <div style="font-size: 12px; font-weight: 700; color: #0F172A;">1,420</div>
+            </div>
+            <div style="flex:1; background: #ECFDF5; border-radius: 8px; padding: 8px; text-align: center;">
+              <div style="font-size: 9px; color: #059669;">Burned</div>
+              <div style="font-size: 12px; font-weight: 700; color: #0F172A;">380</div>
+            </div>
+          </div>
+        </div>
+        <!-- AppBar icons top nav -->
+        <div style="position: absolute; top: 8px; right: 8px; display: flex; gap: 6px;">
+          <div style="width: 24px; height: 24px; background: #e5e7eb; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 10px;">📊</div>
+          <div style="width: 24px; height: 24px; background: #e5e7eb; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 10px;">⚙️</div>
+        </div>
+        <!-- FAB -->
+        <div style="position: absolute; bottom: 60px; right: 12px; width: 40px; height: 40px; background: #059669; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(5,150,105,0.4);">
+          <div style="color: #fff; font-size: 20px; line-height: 1;">+</div>
+        </div>
+        <div style="border-top: 1px solid #e5e7eb; padding: 8px; height: 36px; display: flex; align-items: center; justify-content: center;">
+          <div style="font-size: 9px; color: #9ca3af;">← Dashboard only, icons in AppBar</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Keep FAB + Improve AppBar</h3>
+      <p>Keep current push-navigation structure but upgrade visual design. Dashboard + FAB for logging, icons in top bar for other screens.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul><li>Minimal structural change</li><li>Less refactoring</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Lower discoverability</li><li>Icons feel hidden</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+</div>
