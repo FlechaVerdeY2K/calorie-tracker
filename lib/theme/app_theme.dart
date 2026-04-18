@@ -83,7 +83,7 @@ class AppTheme {
         foregroundColor: colorScheme.onSecondary,
         shape: const CircleBorder(),
       ),
-      bottomAppBarTheme: BottomAppBarTheme(
+      bottomAppBarTheme: BottomAppBarThemeData(
         color: colorScheme.surface,
         surfaceTintColor: Colors.transparent,
         elevation: 8,
