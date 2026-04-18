@@ -53,21 +53,21 @@ class AppTheme {
       useMaterial3: true,
       scaffoldBackgroundColor: scaffoldBackgroundColor,
     );
+    final textTheme = AppTypography.buildTextTheme(base.textTheme).apply(
+      bodyColor: colorScheme.onSurface,
+      displayColor: colorScheme.onSurface,
+    );
 
     return base.copyWith(
-      textTheme: AppTypography.buildTextTheme(base.textTheme).apply(
-        bodyColor: colorScheme.onSurface,
-        displayColor: colorScheme.onSurface,
-      ),
+      textTheme: textTheme,
       appBarTheme: AppBarTheme(
         backgroundColor: colorScheme.surface,
         foregroundColor: colorScheme.onSurface,
         elevation: 0,
         scrolledUnderElevation: 0,
         centerTitle: false,
-        titleTextStyle: AppTypography.buildTextTheme(base.textTheme)
-            .headlineMedium
-            ?.copyWith(color: colorScheme.onSurface),
+        titleTextStyle:
+            textTheme.headlineMedium?.copyWith(color: colorScheme.onSurface),
       ),
       cardTheme: CardThemeData(
         color: colorScheme.surface,
@@ -91,9 +91,7 @@ class AppTheme {
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: colorScheme.surface,
         indicatorColor: colorScheme.primary.withValues(alpha: 0.14),
-        labelTextStyle: WidgetStatePropertyAll(
-          AppTypography.buildTextTheme(base.textTheme).labelSmall,
-        ),
+        labelTextStyle: WidgetStatePropertyAll(textTheme.labelSmall),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,

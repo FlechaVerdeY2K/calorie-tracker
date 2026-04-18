@@ -5,8 +5,11 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   testWidgets(
-    'bottom nav renders four destinations and center add action',
+    'bottom nav renders four destinations and forwards taps',
     (tester) async {
+      final tappedIndexes = <int>[];
+      var addTapCount = 0;
+
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -18,8 +21,8 @@ void main() {
                 FloatingActionButtonLocation.centerDocked,
             bottomNavigationBar: AppBottomNav(
               currentIndex: 1,
-              onTap: (_) {},
-              onAddPressed: () {},
+              onTap: tappedIndexes.add,
+              onAddPressed: () => addTapCount += 1,
             ),
           ),
         ),
@@ -30,6 +33,16 @@ void main() {
       expect(find.text('History'), findsOneWidget);
       expect(find.text('Profile'), findsOneWidget);
       expect(find.byIcon(Icons.add), findsOneWidget);
+
+      await tester.tap(find.text('Home'));
+      await tester.pump();
+      await tester.tap(find.text('Profile'));
+      await tester.pump();
+      await tester.tap(find.bySemanticsLabel('Add entry'));
+      await tester.pump();
+
+      expect(tappedIndexes, <int>[0, 3]);
+      expect(addTapCount, 1);
     },
   );
 
@@ -39,10 +52,12 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: AppShell(
-            homeScreen: Text('Home Screen'),
-            diaryScreen: Text('Diary Screen'),
-            historyScreen: Text('History Screen'),
-            profileScreen: Text('Profile Screen'),
+            destinations: [
+              Text('Home Screen'),
+              Text('Diary Screen'),
+              Text('History Screen'),
+              Text('Profile Screen'),
+            ],
             logEntrySheetChild: Text('Log Entry Sheet'),
           ),
         ),
