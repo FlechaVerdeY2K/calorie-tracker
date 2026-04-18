@@ -7,13 +7,11 @@ class AuthScreen extends StatefulWidget {
     super.key,
     this.onSubmit,
     this.onGoogleSignIn,
-    this.onAppleSignIn,
   });
 
   final Future<void> Function(String email, String password, bool isLogin)?
       onSubmit;
   final Future<void> Function()? onGoogleSignIn;
-  final Future<void> Function()? onAppleSignIn;
 
   @override
   State<AuthScreen> createState() => _AuthScreenState();
@@ -36,19 +34,26 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   Future<void> _submit() async {
+    final password = _passwordController.text;
+
+    if (!_isLogin && password != _confirmPasswordController.text) {
+      setState(() => _error = 'Passwords do not match.');
+      return;
+    }
+
     try {
       if (widget.onSubmit != null) {
         await widget.onSubmit!(
           _emailController.text,
-          _passwordController.text,
+          password,
           _isLogin,
         );
       } else {
         final auth = context.read<AuthService>();
         if (_isLogin) {
-          await auth.signIn(_emailController.text, _passwordController.text);
+          await auth.signIn(_emailController.text, password);
         } else {
-          await auth.signUp(_emailController.text, _passwordController.text);
+          await auth.signUp(_emailController.text, password);
         }
       }
     } catch (e) {
@@ -166,6 +171,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                   setState(() {
                                     _isLogin = !_isLogin;
                                     _error = null;
+                                    _confirmPasswordController.clear();
                                   });
                                 },
                                 child: Text(
@@ -208,10 +214,6 @@ class _AuthScreenState extends State<AuthScreen> {
                                   Expanded(
                                     child: OutlinedButton.icon(
                                       onPressed: () async {
-                                        if (widget.onAppleSignIn != null) {
-                                          await widget.onAppleSignIn!();
-                                          return;
-                                        }
                                         await context
                                             .read<AuthService>()
                                             .signInWithApple();
