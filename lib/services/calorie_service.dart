@@ -85,6 +85,37 @@ class CalorieService {
     });
   }
 
+  Future<List<DailySummary>> fetchLast7Days(String uid) async {
+    final today = DateTime.now();
+    final futures = List.generate(7, (i) {
+      final day =
+          DateTime(today.year, today.month, today.day).subtract(Duration(days: 6 - i));
+      return watchDailySummary(uid, day).first;
+    });
+    return Future.wait(futures);
+  }
+
+  Future<int> getStreak(String uid) async {
+    final today = DateTime.now();
+    int streak = 0;
+    for (int i = 0; i < 365; i++) {
+      final day =
+          DateTime(today.year, today.month, today.day).subtract(Duration(days: i));
+      final end = day.add(const Duration(days: 1));
+      final snap = await _db
+          .collection('logs')
+          .where('uid', isEqualTo: uid)
+          .where('timestamp',
+              isGreaterThanOrEqualTo: Timestamp.fromDate(day))
+          .where('timestamp', isLessThan: Timestamp.fromDate(end))
+          .limit(1)
+          .get();
+      if (snap.docs.isEmpty) break;
+      streak++;
+    }
+    return streak;
+  }
+
   Stream<List<Map<String, dynamic>>> groupFeedStream() {
     final today = DateTime.now();
     final start = DateTime(today.year, today.month, today.day);

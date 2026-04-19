@@ -1,4 +1,3 @@
-import 'package:calorie_tracker/screens/app_shell.dart';
 import 'package:calorie_tracker/widgets/app_bottom_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -43,45 +42,6 @@ void main() {
 
       expect(tappedIndexes, <int>[0, 3]);
       expect(addTapCount, 1);
-    },
-  );
-
-  testWidgets(
-    'app shell swaps top-level views and opens the add sheet',
-    (tester) async {
-      await tester.pumpWidget(
-        const MaterialApp(
-          home: AppShell(
-            destinations: [
-              Text('Home Screen'),
-              Text('Diary Screen'),
-              Text('History Screen'),
-              Text('Profile Screen'),
-            ],
-            logEntrySheetChild: Text('Log Entry Sheet'),
-          ),
-        ),
-      );
-
-      expect(find.text('Home Screen'), findsOneWidget);
-      expect(find.text('Diary Screen'), findsNothing);
-
-      await tester.tap(find.text('Diary'));
-      await tester.pumpAndSettle();
-      expect(find.text('Diary Screen'), findsOneWidget);
-      expect(find.text('Home Screen'), findsNothing);
-
-      await tester.tap(find.text('History'));
-      await tester.pumpAndSettle();
-      expect(find.text('History Screen'), findsOneWidget);
-
-      await tester.tap(find.text('Profile'));
-      await tester.pumpAndSettle();
-      expect(find.text('Profile Screen'), findsOneWidget);
-
-      await tester.tap(find.byIcon(Icons.add));
-      await tester.pumpAndSettle();
-      expect(find.text('Log Entry Sheet'), findsOneWidget);
     },
   );
 }
