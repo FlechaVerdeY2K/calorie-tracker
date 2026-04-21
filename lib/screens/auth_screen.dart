@@ -12,16 +12,33 @@ class AuthScreen extends StatefulWidget {
 class _AuthScreenState extends State<AuthScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
   bool _isLogin = true;
+  bool _obscured = true;
   String? _error;
 
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
+
   Future<void> _submit() async {
-    final auth = context.read<AuthService>();
+    final password = _passwordController.text;
+
+    if (!_isLogin && password != _confirmPasswordController.text) {
+      setState(() => _error = 'Passwords do not match.');
+      return;
+    }
+
     try {
+      final auth = context.read<AuthService>();
       if (_isLogin) {
-        await auth.signIn(_emailController.text, _passwordController.text);
+        await auth.signIn(_emailController.text, password);
       } else {
-        await auth.signUp(_emailController.text, _passwordController.text);
+        await auth.signUp(_emailController.text, password);
       }
     } catch (e) {
       setState(() => _error = e.toString());
@@ -30,66 +47,172 @@ class _AuthScreenState extends State<AuthScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final auth = context.read<AuthService>();
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(Icons.local_fire_department,
-                  size: 64, color: Colors.green),
-              const SizedBox(height: 16),
-              Text(_isLogin ? 'Welcome back' : 'Create account',
-                  style: Theme.of(context).textTheme.headlineSmall),
-              const SizedBox(height: 32),
-              TextField(
-                controller: _emailController,
-                decoration: const InputDecoration(labelText: 'Email'),
-                keyboardType: TextInputType.emailAddress,
-              ),
-              const SizedBox(height: 12),
-              TextField(
-                controller: _passwordController,
-                decoration: const InputDecoration(labelText: 'Password'),
-                obscureText: true,
-              ),
-              if (_error != null) ...[
-                const SizedBox(height: 8),
-                Text(_error!, style: const TextStyle(color: Colors.red)),
-              ],
-              const SizedBox(height: 24),
-              ElevatedButton(
-                onPressed: _submit,
-                style: ElevatedButton.styleFrom(
-                    minimumSize: const Size.fromHeight(48)),
-                child: Text(_isLogin ? 'Log In' : 'Sign Up'),
-              ),
-              const SizedBox(height: 12),
-              OutlinedButton.icon(
-                onPressed: auth.signInWithGoogle,
-                icon: const Icon(Icons.login),
-                label: const Text('Continue with Google'),
-                style: OutlinedButton.styleFrom(
-                    minimumSize: const Size.fromHeight(48)),
-              ),
-              const SizedBox(height: 8),
-              OutlinedButton.icon(
-                onPressed: auth.signInWithApple,
-                icon: const Icon(Icons.apple),
-                label: const Text('Continue with Apple'),
-                style: OutlinedButton.styleFrom(
-                    minimumSize: const Size.fromHeight(48)),
-              ),
-              const SizedBox(height: 16),
-              TextButton(
-                onPressed: () => setState(() => _isLogin = !_isLogin),
-                child: Text(_isLogin
-                    ? "Don't have an account? Sign up"
-                    : 'Already have an account? Log in'),
-              ),
+      body: DecoratedBox(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color(0xFF059669),
+              Color(0xFF065F46),
             ],
+          ),
+        ),
+        child: SafeArea(
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              return SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                  child: IntrinsicHeight(
+                    child: Column(
+                      children: [
+                        const Spacer(),
+                        const Icon(
+                          Icons.spa_rounded,
+                          size: 72,
+                          color: Colors.white,
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          'Calorie Tracker',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineMedium
+                              ?.copyWith(color: Colors.white),
+                        ),
+                        const SizedBox(height: 8),
+                        const Text(
+                          'Know what you eat. Own your goals.',
+                          style: TextStyle(color: Colors.white70),
+                        ),
+                        const Spacer(),
+                        Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.fromLTRB(20, 24, 20, 32),
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(24),
+                            ),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              TextField(
+                                controller: _emailController,
+                                keyboardType: TextInputType.emailAddress,
+                                decoration: const InputDecoration(
+                                  labelText: 'Email',
+                                ),
+                              ),
+                              const SizedBox(height: 12),
+                              TextField(
+                                controller: _passwordController,
+                                obscureText: _obscured,
+                                decoration: InputDecoration(
+                                  labelText: 'Password',
+                                  suffixIcon: IconButton(
+                                    onPressed: () {
+                                      setState(() => _obscured = !_obscured);
+                                    },
+                                    icon: Icon(
+                                      _obscured
+                                          ? Icons.visibility_off
+                                          : Icons.visibility,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              if (!_isLogin) ...[
+                                const SizedBox(height: 12),
+                                TextField(
+                                  controller: _confirmPasswordController,
+                                  obscureText: _obscured,
+                                  decoration: const InputDecoration(
+                                    labelText: 'Confirm Password',
+                                  ),
+                                ),
+                              ],
+                              if (_error != null) ...[
+                                const SizedBox(height: 12),
+                                Text(
+                                  _error!,
+                                  style: const TextStyle(color: Colors.red),
+                                ),
+                              ],
+                              const SizedBox(height: 20),
+                              FilledButton(
+                                onPressed: _submit,
+                                child: Text(
+                                  _isLogin ? 'Sign In' : 'Create Account',
+                                ),
+                              ),
+                              const SizedBox(height: 12),
+                              TextButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _isLogin = !_isLogin;
+                                    _error = null;
+                                    _confirmPasswordController.clear();
+                                  });
+                                },
+                                child: Text(
+                                  _isLogin
+                                      ? "Don't have an account? Create one"
+                                      : 'Already have an account? Sign in',
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              const Row(
+                                children: [
+                                  Expanded(child: Divider()),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 8),
+                                    child: Text('or continue with'),
+                                  ),
+                                  Expanded(child: Divider()),
+                                ],
+                              ),
+                              const SizedBox(height: 16),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: OutlinedButton.icon(
+                                      onPressed: () async {
+                                        await context
+                                            .read<AuthService>()
+                                            .signInWithGoogle();
+                                      },
+                                      icon: const Icon(Icons.g_mobiledata),
+                                      label: const Text('Continue with Google'),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 12),
+                                  Expanded(
+                                    child: OutlinedButton.icon(
+                                      onPressed: () async {
+                                        await context
+                                            .read<AuthService>()
+                                            .signInWithApple();
+                                      },
+                                      icon: const Icon(Icons.apple),
+                                      label: const Text('Continue with Apple'),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            },
           ),
         ),
       ),
