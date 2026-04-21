@@ -7,20 +7,38 @@ import 'package:calorie_tracker/widgets/macro_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, required this.onViewFullDiary});
 
   final VoidCallback onViewFullDiary;
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  late Stream<DailySummary> _summaryStream;
+  late DateTime _today;
+
+  @override
+  void initState() {
+    super.initState();
+    _today = DateTime.now();
+    final uid = context.read<AuthService>().currentUser!.uid;
+    _summaryStream = CalorieService().watchDailySummary(uid, _today);
+  }
+
+  @override
   Widget build(BuildContext context) {
     final auth = context.read<AuthService>();
-    final uid = auth.currentUser!.uid;
-    final today = DateTime.now();
 
     return StreamBuilder<DailySummary>(
-      stream: CalorieService().watchDailySummary(uid, today),
+      stream: _summaryStream,
       builder: (context, summarySnap) {
+        if (summarySnap.hasError) {
+          debugPrint('HomeScreen Firestore error: ${summarySnap.error}');
+        }
+        final today = _today;
         final summary = summarySnap.data ?? DailySummary.empty(today);
         final textTheme = Theme.of(context).textTheme;
 
@@ -29,22 +47,27 @@ class HomeScreen extends StatelessWidget {
             SliverToBoxAdapter(
               child: Container(
                 color: AppColors.lightPrimary,
-                padding: const EdgeInsets.fromLTRB(20, 24, 20, 32),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '${_formatHeaderDate(summary.date)} · Goal: ${summary.goal.toStringAsFixed(0)}',
-                      style: const TextStyle(color: Colors.white70),
+                child: SafeArea(
+                  bottom: false,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 24, 20, 32),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '${_formatHeaderDate(summary.date)} · Goal: ${summary.goal.toStringAsFixed(0)}',
+                          style: const TextStyle(color: Colors.white70),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Good ${_greetingForHour(today.hour)}, ${_displayName(auth)}',
+                          style: textTheme.headlineMedium?.copyWith(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 8),
-                    Text(
-                      'Good ${_greetingForHour(today.hour)}, ${_displayName(auth)}',
-                      style: textTheme.headlineMedium?.copyWith(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),
@@ -107,7 +130,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 24),
                   TextButton(
-                    onPressed: onViewFullDiary,
+                    onPressed: widget.onViewFullDiary,
                     child: const Text('View full diary →'),
                   ),
                 ],

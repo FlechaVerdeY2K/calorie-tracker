@@ -21,6 +21,7 @@ class HistoryScreen extends StatelessWidget {
       children: [
         // Green header
         Container(
+          width: double.infinity,
           color: AppColors.lightPrimary,
           child: SafeArea(
             bottom: false,
@@ -70,11 +71,9 @@ class _HistoryBody extends StatelessWidget {
     return days.fold<double>(0, (s, d) => s + d.eaten) / days.length;
   }
 
-  int get _deficitDays =>
-      days.where((d) => d.goal > 0 && d.eaten < d.goal).length;
+  int get _deficitDays => days.where((d) => d.net < 0).length;
 
-  int get _surplusDays =>
-      days.where((d) => d.goal > 0 && d.eaten >= d.goal).length;
+  int get _surplusDays => days.where((d) => d.net > 0).length;
 
   @override
   Widget build(BuildContext context) {

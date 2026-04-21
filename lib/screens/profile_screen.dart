@@ -87,8 +87,10 @@ class _ProfileViewState extends State<_ProfileView> {
         content: TextField(
           controller: ctrl,
           keyboardType: TextInputType.number,
-          decoration:
-              InputDecoration(labelText: label, suffixText: 'kcal'),
+          decoration: InputDecoration(
+            labelText: label,
+            suffixText: label.contains('Protein') ? 'g' : 'kcal',
+          ),
           autofocus: true,
         ),
         actions: [

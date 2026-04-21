@@ -15,9 +15,17 @@ class AppShell extends StatefulWidget {
 
 class _AppShellState extends State<AppShell> {
   int _currentIndex = 0;
+  DateTime? _diaryDate;
+  int _diaryRebuildKey = 0;
 
   void _goToDiary({DateTime? date}) {
-    setState(() => _currentIndex = 1);
+    setState(() {
+      if (date != null) {
+        _diaryDate = date;
+        _diaryRebuildKey++;
+      }
+      _currentIndex = 1;
+    });
   }
 
   Future<void> _openLogEntrySheet({String mealSlot = 'lunch'}) {
@@ -38,11 +46,9 @@ class _AppShellState extends State<AppShell> {
         index: _currentIndex,
         children: [
           HomeScreen(onViewFullDiary: _goToDiary),
-          const DiaryScreen(),
+          DiaryScreen(key: ValueKey(_diaryRebuildKey), initialDate: _diaryDate),
           HistoryScreen(
-            onDayTapped: (date) {
-              setState(() => _currentIndex = 1);
-            },
+            onDayTapped: (date) => _goToDiary(date: date),
           ),
           const ProfileScreen(),
         ],

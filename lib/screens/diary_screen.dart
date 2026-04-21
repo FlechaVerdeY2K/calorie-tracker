@@ -20,9 +20,12 @@ class DiaryScreen extends StatefulWidget {
 class _DiaryScreenState extends State<DiaryScreen> {
   late DateTime _selectedDate;
   late final PageController _datePageController;
+  late Stream<List<LogEntryRecord>> _entriesStream;
 
   static const _stripDays = 7;
   static const int _centerOffset = 500;
+
+  String get _uid => context.read<AuthService>().currentUser!.uid;
 
   @override
   void initState() {
@@ -34,6 +37,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
       initialPage: _centerOffset,
       viewportFraction: 1 / _stripDays,
     );
+    _entriesStream = CalorieService().watchEntriesForDay(_uid, _selectedDate);
   }
 
   @override
@@ -52,7 +56,10 @@ class _DiaryScreenState extends State<DiaryScreen> {
     final today = DateTime.now();
     final base = DateTime(today.year, today.month, today.day);
     final diff = date.difference(base).inDays;
-    setState(() => _selectedDate = date);
+    setState(() {
+      _selectedDate = date;
+      _entriesStream = CalorieService().watchEntriesForDay(_uid, date);
+    });
     _datePageController.animateToPage(
       _centerOffset + diff,
       duration: const Duration(milliseconds: 200),
@@ -75,7 +82,6 @@ class _DiaryScreenState extends State<DiaryScreen> {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
-    final uid = context.read<AuthService>().currentUser!.uid;
 
     return Column(
       children: [
@@ -121,7 +127,10 @@ class _DiaryScreenState extends State<DiaryScreen> {
                     onPageChanged: (page) {
                       final date = _pageToDate(page);
                       if (!date.isAfter(DateTime.now())) {
-                        setState(() => _selectedDate = date);
+                        setState(() {
+                          _selectedDate = date;
+                          _entriesStream = CalorieService().watchEntriesForDay(_uid, date);
+                        });
                       }
                     },
                     itemBuilder: (context, page) {
@@ -193,8 +202,11 @@ class _DiaryScreenState extends State<DiaryScreen> {
         // Diary content
         Expanded(
           child: StreamBuilder<List<LogEntryRecord>>(
-            stream: CalorieService().watchEntriesForDay(uid, _selectedDate),
+            stream: _entriesStream,
             builder: (context, snap) {
+              if (snap.hasError) {
+                debugPrint('DiaryScreen Firestore error: ${snap.error}');
+              }
               final entries = snap.data ?? [];
 
               return ListView(
@@ -384,9 +396,7 @@ class _MealGroup extends StatelessWidget {
                       caloriesLabel: isExercise
                           ? '\u2212${e.calories.toStringAsFixed(0)} cal'
                           : '${e.calories.toStringAsFixed(0)} cal',
-                      backgroundColor: isExercise
-                          ? const Color(0xFFECFDF5)
-                          : null,
+                      backgroundColor: null,
                     ),
                   ),
                 )),

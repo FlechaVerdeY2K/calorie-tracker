@@ -33,8 +33,11 @@ class DailySummary {
   String get weekdayLabel =>
       ['M', 'T', 'W', 'T', 'F', 'S', 'S'][date.weekday - 1];
 
-  String get netLabel =>
-      '${net <= 0 ? '-' : '+'}${net.abs().toStringAsFixed(0)}';
+  String get netLabel {
+    final rounded = net.round();
+    if (rounded == 0) return '0';
+    return '${rounded < 0 ? '-' : '+'}${rounded.abs()}';
+  }
 
   factory DailySummary.empty(DateTime date) {
     return DailySummary(
