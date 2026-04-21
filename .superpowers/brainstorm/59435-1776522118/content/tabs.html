@@ -1,0 +1,134 @@
+<h2>What are the 4 tabs around the "+" button?</h2>
+<p class="subtitle">Center "+" is always Log. The other 4 slots define what's reachable from anywhere in the app. Settings moves into Profile in all options.</p>
+
+<div class="cards">
+
+  <!-- Option A: Home · History · [+] · Foods · Profile -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="background: #ECFDF5; padding: 20px; display: flex; justify-content: center;">
+      <div style="background: #fff; border-radius: 16px; width: 240px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); overflow: hidden;">
+        <div style="height: 80px; background: linear-gradient(to bottom, #059669, #ECFDF5); display:flex; align-items:center; justify-content:center;">
+          <div style="font-size:12px; color:#fff; font-weight:700; opacity:0.7;">screen content</div>
+        </div>
+        <div style="border-top: 1px solid #e5e7eb; display: flex; align-items: flex-end; justify-content: space-around; padding: 6px 8px 8px; background:#fff;">
+          <div style="text-align:center; flex:1;">
+            <div style="font-size:18px;">🏠</div>
+            <div style="font-size:8px; color:#059669; font-weight:700;">Home</div>
+          </div>
+          <div style="text-align:center; flex:1;">
+            <div style="font-size:18px;">📊</div>
+            <div style="font-size:8px; color:#9ca3af;">History</div>
+          </div>
+          <div style="flex:1; display:flex; justify-content:center; margin-bottom:4px;">
+            <div style="width:44px; height:44px; background:#059669; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(5,150,105,0.45); margin-top:-18px;">
+              <div style="color:#fff; font-size:24px; line-height:1; margin-top:-1px;">+</div>
+            </div>
+          </div>
+          <div style="text-align:center; flex:1;">
+            <div style="font-size:18px;">🍎</div>
+            <div style="font-size:8px; color:#9ca3af;">Foods</div>
+          </div>
+          <div style="text-align:center; flex:1;">
+            <div style="font-size:18px;">👤</div>
+            <div style="font-size:8px; color:#9ca3af;">Profile</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Home · History · [+] · Foods · Profile</h3>
+      <p>Keep all current screens as tabs. Food Database gets its own permanent tab. Settings lives inside Profile.</p>
+      <ul style="font-size:13px; color:#6b7280; padding-left:16px; margin:4px 0 0;">
+        <li>Best for users who browse/manage foods often</li>
+        <li>5 destinations always reachable</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Option B: Home · Stats · [+] · Friends · Profile -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="background: #ECFDF5; padding: 20px; display: flex; justify-content: center;">
+      <div style="background: #fff; border-radius: 16px; width: 240px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); overflow: hidden;">
+        <div style="height: 80px; background: linear-gradient(to bottom, #059669, #ECFDF5); display:flex; align-items:center; justify-content:center;">
+          <div style="font-size:12px; color:#fff; font-weight:700; opacity:0.7;">screen content</div>
+        </div>
+        <div style="border-top: 1px solid #e5e7eb; display: flex; align-items: flex-end; justify-content: space-around; padding: 6px 8px 8px; background:#fff;">
+          <div style="text-align:center; flex:1;">
+            <div style="font-size:18px;">🏠</div>
+            <div style="font-size:8px; color:#059669; font-weight:700;">Home</div>
+          </div>
+          <div style="text-align:center; flex:1;">
+            <div style="font-size:18px;">📈</div>
+            <div style="font-size:8px; color:#9ca3af;">Stats</div>
+          </div>
+          <div style="flex:1; display:flex; justify-content:center; margin-bottom:4px;">
+            <div style="width:44px; height:44px; background:#059669; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(5,150,105,0.45); margin-top:-18px;">
+              <div style="color:#fff; font-size:24px; line-height:1; margin-top:-1px;">+</div>
+            </div>
+          </div>
+          <div style="text-align:center; flex:1;">
+            <div style="font-size:18px;">👥</div>
+            <div style="font-size:8px; color:#9ca3af;">Friends</div>
+          </div>
+          <div style="text-align:center; flex:1;">
+            <div style="font-size:18px;">👤</div>
+            <div style="font-size:8px; color:#9ca3af;">Profile</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Home · Stats · [+] · Friends · Profile</h3>
+      <p>Promote the Friends feed and 7-day history to top-level tabs. Food Database moves inside Log flow. Settings inside Profile.</p>
+      <ul style="font-size:13px; color:#6b7280; padding-left:16px; margin:4px 0 0;">
+        <li>Social + analytics feel (like Strava)</li>
+        <li>Foods only accessible when logging</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Option C: Home · Log · [+] · History · Profile (Log tab shows today's entries) -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="background: #ECFDF5; padding: 20px; display: flex; justify-content: center;">
+      <div style="background: #fff; border-radius: 16px; width: 240px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); overflow: hidden;">
+        <div style="height: 80px; background: linear-gradient(to bottom, #059669, #ECFDF5); display:flex; align-items:center; justify-content:center;">
+          <div style="font-size:12px; color:#fff; font-weight:700; opacity:0.7;">screen content</div>
+        </div>
+        <div style="border-top: 1px solid #e5e7eb; display: flex; align-items: flex-end; justify-content: space-around; padding: 6px 8px 8px; background:#fff;">
+          <div style="text-align:center; flex:1;">
+            <div style="font-size:18px;">🏠</div>
+            <div style="font-size:8px; color:#059669; font-weight:700;">Home</div>
+          </div>
+          <div style="text-align:center; flex:1;">
+            <div style="font-size:18px;">📋</div>
+            <div style="font-size:8px; color:#9ca3af;">Diary</div>
+          </div>
+          <div style="flex:1; display:flex; justify-content:center; margin-bottom:4px;">
+            <div style="width:44px; height:44px; background:#059669; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(5,150,105,0.45); margin-top:-18px;">
+              <div style="color:#fff; font-size:24px; line-height:1; margin-top:-1px;">+</div>
+            </div>
+          </div>
+          <div style="text-align:center; flex:1;">
+            <div style="font-size:18px;">📊</div>
+            <div style="font-size:8px; color:#9ca3af;">History</div>
+          </div>
+          <div style="text-align:center; flex:1;">
+            <div style="font-size:18px;">👤</div>
+            <div style="font-size:8px; color:#9ca3af;">Profile</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Home · Diary · [+] · History · Profile</h3>
+      <p>Diary tab = full today's meal/exercise log (swipeable by date). History tab = 7-day charts. Foods + Friends inside their respective flows.</p>
+      <ul style="font-size:13px; color:#6b7280; padding-left:16px; margin:4px 0 0;">
+        <li>Most focused on daily tracking habit</li>
+        <li>Cleanest separation of concerns</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<p class="subtitle" style="margin-top:12px; text-align:center;">In all options: tapping <strong style="color:#059669;">+</strong> opens the Log Entry sheet. Settings lives in Profile. Food Database accessible from Log flow.</p>

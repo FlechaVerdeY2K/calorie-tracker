@@ -1,0 +1,163 @@
+<h2>What's the hero on your Dashboard?</h2>
+<p class="subtitle">The dashboard is the screen users open every day. What should dominate their attention?</p>
+
+<div class="cards">
+
+  <!-- Option A: Calorie Ring Hero -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="background: #ECFDF5; padding: 16px; display: flex; justify-content: center;">
+      <div style="background: #fff; border-radius: 20px; width: 200px; min-height: 300px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); overflow: hidden; display: flex; flex-direction: column;">
+        <!-- Header -->
+        <div style="background: #059669; padding: 12px 14px 10px; display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <div style="font-size: 9px; color: rgba(255,255,255,0.7);">Friday, Apr 18</div>
+            <div style="font-size: 14px; font-weight: 800; color: #fff;">Good morning!</div>
+          </div>
+          <div style="width: 28px; height: 28px; background: rgba(255,255,255,0.2); border-radius: 50%; display:flex; align-items:center; justify-content:center; font-size:14px;">🔔</div>
+        </div>
+        <!-- Ring hero -->
+        <div style="padding: 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; flex: 1;">
+          <div style="position: relative; width: 100px; height: 100px;">
+            <svg viewBox="0 0 100 100" width="100" height="100">
+              <circle cx="50" cy="50" r="40" fill="none" stroke="#e5e7eb" stroke-width="10"/>
+              <circle cx="50" cy="50" r="40" fill="none" stroke="#059669" stroke-width="10" stroke-dasharray="175 251" stroke-linecap="round" transform="rotate(-90 50 50)"/>
+              <circle cx="50" cy="50" r="40" fill="none" stroke="#EA580C" stroke-width="10" stroke-dasharray="50 251" stroke-linecap="round" transform="rotate(61 50 50)"/>
+            </svg>
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); text-align: center;">
+              <div style="font-size: 18px; font-weight: 800; color: #0F172A; line-height: 1;">1,840</div>
+              <div style="font-size: 8px; color: #6b7280;">remaining</div>
+            </div>
+          </div>
+          <!-- Ring legend -->
+          <div style="display: flex; gap: 12px; font-size: 9px;">
+            <div style="display:flex; align-items:center; gap:3px;"><div style="width:8px;height:8px;border-radius:50%;background:#059669;"></div><span style="color:#6b7280;">Eaten <strong style="color:#0F172A;">1,420</strong></span></div>
+            <div style="display:flex; align-items:center; gap:3px;"><div style="width:8px;height:8px;border-radius:50%;background:#EA580C;"></div><span style="color:#6b7280;">Burned <strong style="color:#0F172A;">380</strong></span></div>
+          </div>
+          <!-- Macro row -->
+          <div style="display: flex; gap: 6px; width: 100%;">
+            <div style="flex:1; background:#FFF7ED; border-radius:8px; padding:6px; text-align:center;">
+              <div style="font-size:8px; color:#EA580C; font-weight:600;">CARBS</div>
+              <div style="font-size:11px; font-weight:700; color:#0F172A;">142g</div>
+            </div>
+            <div style="flex:1; background:#EFF6FF; border-radius:8px; padding:6px; text-align:center;">
+              <div style="font-size:8px; color:#3B82F6; font-weight:600;">PROTEIN</div>
+              <div style="font-size:11px; font-weight:700; color:#0F172A;">68g</div>
+            </div>
+            <div style="flex:1; background:#FEF2F2; border-radius:8px; padding:6px; text-align:center;">
+              <div style="font-size:8px; color:#EF4444; font-weight:600;">FAT</div>
+              <div style="font-size:11px; font-weight:700; color:#0F172A;">42g</div>
+            </div>
+          </div>
+          <!-- Protein progress -->
+          <div style="width: 100%; background: #f3f4f6; border-radius: 8px; padding: 8px;">
+            <div style="display:flex; justify-content:space-between; font-size:9px; margin-bottom:4px;">
+              <span style="color:#6b7280;">Protein goal</span><span style="font-weight:700; color:#3B82F6;">68 / 150g</span>
+            </div>
+            <div style="background:#e5e7eb; border-radius:4px; height:5px;"><div style="width:45%; height:100%; background:#3B82F6; border-radius:4px;"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Calorie Ring Hero</h3>
+      <p>Donut ring dominates. Visual, satisfying, motivational. Macros in color-coded chips below. Like Cronometer / Apple Fitness.</p>
+    </div>
+  </div>
+
+  <!-- Option B: Bold Number + Cards -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="background: #ECFDF5; padding: 16px; display: flex; justify-content: center;">
+      <div style="background: #fff; border-radius: 20px; width: 200px; min-height: 300px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); overflow: hidden; display: flex; flex-direction: column;">
+        <div style="background: #059669; padding: 12px 14px 18px;">
+          <div style="font-size: 9px; color: rgba(255,255,255,0.7);">Friday · 3,260 cal goal</div>
+          <div style="font-size: 36px; font-weight: 900; color: #fff; line-height: 1.1; letter-spacing: -1px;">1,840</div>
+          <div style="font-size: 10px; color: rgba(255,255,255,0.8);">calories remaining</div>
+          <!-- Green progress bar -->
+          <div style="background: rgba(255,255,255,0.3); border-radius: 4px; height: 4px; margin-top: 8px;"><div style="width: 44%; height: 100%; background: #fff; border-radius: 4px;"></div></div>
+        </div>
+        <div style="padding: 10px; display: flex; flex-direction: column; gap: 8px; flex: 1;">
+          <!-- Eaten / Burned row -->
+          <div style="display: flex; gap: 6px;">
+            <div style="flex:1; border: 1.5px solid #EA580C; border-radius:10px; padding:8px; text-align:center;">
+              <div style="font-size:8px; color:#EA580C; font-weight:700; text-transform:uppercase;">Eaten</div>
+              <div style="font-size:16px; font-weight:800; color:#0F172A;">1,420</div>
+            </div>
+            <div style="flex:1; border: 1.5px solid #059669; border-radius:10px; padding:8px; text-align:center;">
+              <div style="font-size:8px; color:#059669; font-weight:700; text-transform:uppercase;">Burned</div>
+              <div style="font-size:16px; font-weight:800; color:#0F172A;">380</div>
+            </div>
+          </div>
+          <!-- Macro bars -->
+          <div style="display: flex; flex-direction: column; gap: 5px;">
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:9px; margin-bottom:2px;"><span style="color:#6b7280;">Protein</span><span style="font-weight:600;">68 / 150g</span></div>
+              <div style="background:#e5e7eb; border-radius:3px; height:4px;"><div style="width:45%; height:100%; background:#3B82F6; border-radius:3px;"></div></div>
+            </div>
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:9px; margin-bottom:2px;"><span style="color:#6b7280;">Carbs</span><span style="font-weight:600;">142 / 300g</span></div>
+              <div style="background:#e5e7eb; border-radius:3px; height:4px;"><div style="width:47%; height:100%; background:#EA580C; border-radius:3px;"></div></div>
+            </div>
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:9px; margin-bottom:2px;"><span style="color:#6b7280;">Fat</span><span style="font-weight:600;">42 / 90g</span></div>
+              <div style="background:#e5e7eb; border-radius:3px; height:4px;"><div style="width:46%; height:100%; background:#EF4444; border-radius:3px;"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Bold Number Hero</h3>
+      <p>Giant calorie number in green header. Eaten/Burned cards below. Macro progress bars. Clean, data-dense, scannable at a glance.</p>
+    </div>
+  </div>
+
+  <!-- Option C: Summary + Meal Log -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="background: #ECFDF5; padding: 16px; display: flex; justify-content: center;">
+      <div style="background: #fff; border-radius: 20px; width: 200px; min-height: 300px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); overflow: hidden; display: flex; flex-direction: column;">
+        <!-- Compact summary strip -->
+        <div style="background: #059669; padding: 10px 14px;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <div style="font-size: 9px; color: rgba(255,255,255,0.7);">Today</div>
+              <div style="font-size: 20px; font-weight: 800; color: #fff;">1,840 left</div>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-size: 9px; color: rgba(255,255,255,0.7);">Goal: 3,260</div>
+              <div style="font-size: 9px; color: #86EFAC;">-44% remaining</div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px; margin-top: 6px;">
+            <div style="font-size: 9px; color: rgba(255,255,255,0.85);">🍽 <strong>1,420</strong> eaten</div>
+            <div style="font-size: 9px; color: rgba(255,255,255,0.85);">🔥 <strong>380</strong> burned</div>
+          </div>
+        </div>
+        <!-- Today's log -->
+        <div style="padding: 10px; flex: 1; overflow: hidden;">
+          <div style="font-size: 10px; font-weight: 700; color: #0F172A; margin-bottom: 6px;">Today's Log</div>
+          <!-- Log items -->
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 5px 8px; background: #f9fafb; border-radius: 8px;">
+              <div style="font-size: 9px; color: #0F172A; font-weight: 600;">🥣 Oatmeal</div>
+              <div style="font-size: 9px; color: #EA580C; font-weight: 700;">320 cal</div>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 5px 8px; background: #f9fafb; border-radius: 8px;">
+              <div style="font-size: 9px; color: #0F172A; font-weight: 600;">🍗 Chicken salad</div>
+              <div style="font-size: 9px; color: #EA580C; font-weight: 700;">540 cal</div>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 5px 8px; background: #ECFDF5; border-radius: 8px; border: 1px dashed #059669;">
+              <div style="font-size: 9px; color: #059669; font-weight: 600;">🏃 Morning run</div>
+              <div style="font-size: 9px; color: #059669; font-weight: 700;">-380 cal</div>
+            </div>
+            <div style="text-align: center; font-size: 9px; color: #9ca3af; padding-top: 2px;">+ Add more →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Summary + Live Log</h3>
+      <p>Compact stat header + today's meal/exercise entries visible on home screen. Most functional, least visual. Like a timeline tracker.</p>
+    </div>
+  </div>
+
+</div>

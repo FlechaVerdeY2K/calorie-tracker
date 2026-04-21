@@ -1,0 +1,243 @@
+<h2>Updated screens — Profile &amp; Diary</h2>
+<p class="subtitle">Profile now has unit toggles with auto-conversion. Diary shows scrollable date strip with calendar jump.</p>
+
+<div style="display:flex; gap:24px; flex-wrap:wrap; justify-content:center; margin-top:8px;">
+
+  <!-- PROFILE V2 -->
+  <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+
+    <div style="width:210px; border-radius:28px; overflow:hidden; box-shadow:0 8px 32px rgba(0,0,0,0.13); background:#fff; display:flex; flex-direction:column; min-height:420px;">
+
+      <!-- Header -->
+      <div style="background:#059669; padding:14px 14px 24px; text-align:center;">
+        <div style="width:52px; height:52px; background:rgba(255,255,255,0.25); border-radius:50%; margin:0 auto 6px; display:flex; align-items:center; justify-content:center; font-size:24px;">👤</div>
+        <div style="font-size:15px; font-weight:800; color:#fff;">Edgar Herrera</div>
+        <div style="font-size:9px; color:rgba(255,255,255,0.7); margin-top:1px;">edgarherrer100@gmail.com</div>
+      </div>
+
+      <!-- Stats card -->
+      <div style="margin:-14px 12px 0; background:#fff; border-radius:14px; box-shadow:0 3px 14px rgba(0,0,0,0.09); padding:10px 12px; display:flex; gap:6px; position:relative; z-index:2; border:1px solid #e5e7eb;">
+        <div style="flex:1; text-align:center;">
+          <div style="font-size:14px; font-weight:800; color:#0F172A;">185</div>
+          <div style="font-size:8px; color:#6b7280;">lbs</div>
+        </div>
+        <div style="flex:1; text-align:center;">
+          <div style="font-size:14px; font-weight:800; color:#0F172A;">5'11"</div>
+          <div style="font-size:8px; color:#6b7280;">height</div>
+        </div>
+        <div style="flex:1; text-align:center;">
+          <div style="font-size:14px; font-weight:800; color:#0F172A;">1,890</div>
+          <div style="font-size:8px; color:#6b7280;">BMR</div>
+        </div>
+        <div style="flex:1; text-align:center;">
+          <div style="font-size:14px; font-weight:800; color:#0F172A;">3,260</div>
+          <div style="font-size:8px; color:#6b7280;">goal</div>
+        </div>
+      </div>
+
+      <div style="flex:1; padding-top:10px; overflow:hidden;">
+
+        <!-- BODY STATS with unit toggles -->
+        <div style="padding:0 12px; margin-bottom:6px;">
+          <div style="font-size:10px; font-weight:700; color:#0F172A; text-transform:uppercase; letter-spacing:0.4px; margin-bottom:5px;">Body Stats</div>
+
+          <!-- Weight row with kg/lbs toggle -->
+          <div style="background:#f9fafb; border-radius:10px; padding:8px 10px; margin-bottom:4px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <span style="font-size:10px; color:#0F172A; font-weight:600;">Weight</span>
+              <!-- Unit toggle pill -->
+              <div style="display:flex; background:#e5e7eb; border-radius:20px; padding:2px; gap:1px;">
+                <div style="background:#059669; color:#fff; border-radius:18px; padding:2px 8px; font-size:8px; font-weight:700;">lbs</div>
+                <div style="color:#6b7280; padding:2px 8px; font-size:8px; font-weight:600;">kg</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:6px; align-items:center;">
+              <div style="flex:1; background:#fff; border:1.5px solid #059669; border-radius:8px; padding:5px 8px; font-size:12px; font-weight:700; color:#0F172A;">185</div>
+              <span style="font-size:9px; color:#6b7280;">lbs</span>
+              <div style="font-size:9px; color:#9ca3af; background:#ECFDF5; border-radius:6px; padding:3px 7px;">= 83.9 kg</div>
+            </div>
+          </div>
+
+          <!-- Height row with ft/in ↔ m toggle -->
+          <div style="background:#f9fafb; border-radius:10px; padding:8px 10px; margin-bottom:4px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <span style="font-size:10px; color:#0F172A; font-weight:600;">Height</span>
+              <div style="display:flex; background:#e5e7eb; border-radius:20px; padding:2px; gap:1px;">
+                <div style="background:#059669; color:#fff; border-radius:18px; padding:2px 8px; font-size:8px; font-weight:700;">ft/in</div>
+                <div style="color:#6b7280; padding:2px 8px; font-size:8px; font-weight:600;">m</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:6px; align-items:center;">
+              <div style="flex:1; background:#fff; border:1.5px solid #059669; border-radius:8px; padding:5px 8px; font-size:12px; font-weight:700; color:#0F172A;">5'</div>
+              <div style="flex:1; background:#fff; border:1.5px solid #059669; border-radius:8px; padding:5px 8px; font-size:12px; font-weight:700; color:#0F172A;">11"</div>
+              <div style="font-size:9px; color:#9ca3af; background:#ECFDF5; border-radius:6px; padding:3px 7px;">= 1.80 m</div>
+            </div>
+          </div>
+
+          <!-- Age row -->
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 10px; background:#f9fafb; border-radius:10px; margin-bottom:4px;">
+            <span style="font-size:10px; color:#0F172A; font-weight:600;">Age</span>
+            <div style="display:flex; align-items:center; gap:4px;">
+              <div style="background:#fff; border:1.5px solid #e5e7eb; border-radius:8px; padding:4px 10px; font-size:12px; font-weight:700; color:#0F172A;">28</div>
+              <span style="font-size:9px; color:#6b7280;">yrs ›</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Goals section -->
+        <div style="padding:0 12px;">
+          <div style="font-size:10px; font-weight:700; color:#0F172A; text-transform:uppercase; letter-spacing:0.4px; margin-bottom:5px;">Goals</div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:6px 10px; background:#f9fafb; border-radius:8px; margin-bottom:3px;">
+            <span style="font-size:10px;">Calorie goal</span>
+            <span style="font-size:10px; font-weight:600; color:#6b7280;">3,260 cal ›</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:6px 10px; background:#f9fafb; border-radius:8px;">
+            <span style="font-size:10px;">Protein goal</span>
+            <span style="font-size:10px; font-weight:600; color:#6b7280;">150g ›</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom nav -->
+      <div style="border-top:1px solid #e5e7eb; display:flex; align-items:flex-end; justify-content:space-around; padding:5px 6px 8px; background:#fff; flex-shrink:0;">
+        <div style="text-align:center; flex:1;"><div style="font-size:16px;">🏠</div><div style="font-size:7.5px; color:#9ca3af; font-weight:500;">Home</div></div>
+        <div style="text-align:center; flex:1;"><div style="font-size:16px;">📋</div><div style="font-size:7.5px; color:#9ca3af; font-weight:500;">Diary</div></div>
+        <div style="flex:1; display:flex; justify-content:center; align-items:flex-end;">
+          <div style="width:44px; height:44px; background:#059669; border-radius:50%; display:flex; align-items:center; justify-content:center; margin-bottom:2px; margin-top:-18px; box-shadow:0 4px 14px rgba(5,150,105,0.45); font-size:24px; color:#fff; line-height:1;">+</div>
+        </div>
+        <div style="text-align:center; flex:1;"><div style="font-size:16px;">📊</div><div style="font-size:7.5px; color:#9ca3af; font-weight:500;">History</div></div>
+        <div style="text-align:center; flex:1;"><div style="font-size:16px;">👤</div><div style="font-size:7.5px; color:#059669; font-weight:700;">Profile</div></div>
+      </div>
+    </div>
+
+    <div style="font-size:13px; font-weight:700; color:#0F172A;">Profile (updated)</div>
+    <div style="font-size:11px; color:#6b7280; text-align:center;">kg↔lbs toggle · ft/in↔m toggle<br>Live conversion shown inline</div>
+  </div>
+
+  <!-- DIARY V2 -->
+  <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+    <div style="width:210px; border-radius:28px; overflow:hidden; box-shadow:0 8px 32px rgba(0,0,0,0.13); background:#fff; display:flex; flex-direction:column; min-height:420px;">
+
+      <!-- Header with calendar icon -->
+      <div style="background:#059669; padding:12px 14px 10px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <div style="font-size:16px; font-weight:800; color:#fff;">Diary</div>
+          <div style="display:flex; align-items:center; gap:6px;">
+            <div style="font-size:9px; color:rgba(255,255,255,0.8);">← swipe for more</div>
+            <div style="width:26px; height:26px; background:rgba(255,255,255,0.2); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:13px;">📅</div>
+          </div>
+        </div>
+        <!-- Scrollable date strip - showing arrow hint on left -->
+        <div style="display:flex; gap:4px; align-items:center; overflow:hidden;">
+          <div style="color:rgba(255,255,255,0.5); font-size:12px; flex-shrink:0;">‹</div>
+          <div style="flex:1; background:rgba(255,255,255,0.1); border-radius:8px; padding:4px 2px; text-align:center; display:flex; flex-direction:column;">
+            <div style="font-size:7.5px; color:rgba(255,255,255,0.6);">WED</div>
+            <div style="font-size:11px; font-weight:700; color:rgba(255,255,255,0.7);">16</div>
+          </div>
+          <div style="flex:1; background:rgba(255,255,255,0.1); border-radius:8px; padding:4px 2px; text-align:center; display:flex; flex-direction:column;">
+            <div style="font-size:7.5px; color:rgba(255,255,255,0.6);">THU</div>
+            <div style="font-size:11px; font-weight:700; color:rgba(255,255,255,0.7);">17</div>
+          </div>
+          <div style="flex:1.2; background:#fff; border-radius:8px; padding:4px 2px; text-align:center; display:flex; flex-direction:column;">
+            <div style="font-size:7.5px; color:#6b7280;">FRI</div>
+            <div style="font-size:11px; font-weight:700; color:#059669;">18</div>
+          </div>
+          <div style="flex:1; background:rgba(255,255,255,0.1); border-radius:8px; padding:4px 2px; text-align:center; display:flex; flex-direction:column;">
+            <div style="font-size:7.5px; color:rgba(255,255,255,0.6);">SAT</div>
+            <div style="font-size:11px; font-weight:700; color:rgba(255,255,255,0.7);">19</div>
+          </div>
+          <div style="flex:1; background:rgba(255,255,255,0.1); border-radius:8px; padding:4px 2px; text-align:center; display:flex; flex-direction:column;">
+            <div style="font-size:7.5px; color:rgba(255,255,255,0.6);">SUN</div>
+            <div style="font-size:11px; font-weight:700; color:rgba(255,255,255,0.7);">20</div>
+          </div>
+          <div style="color:rgba(255,255,255,0.5); font-size:12px; flex-shrink:0;">›</div>
+        </div>
+      </div>
+
+      <!-- Log entries -->
+      <div style="flex:1; overflow:hidden; padding-bottom:4px;">
+        <div style="padding:6px 12px 0;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <span style="font-size:10px; font-weight:700; color:#0F172A; text-transform:uppercase; letter-spacing:0.4px;">Breakfast</span>
+            <span style="font-size:9px; color:#6b7280;">320 cal</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:5px 8px; background:#f9fafb; border-radius:8px; margin-bottom:3px;">
+            <div>
+              <div style="font-size:9px; font-weight:600; color:#0F172A;">Oatmeal with berries</div>
+              <div style="font-size:8px; color:#9ca3af;">P 8g · C 52g · F 6g</div>
+            </div>
+            <div style="font-size:10px; font-weight:700; color:#EA580C;">320</div>
+          </div>
+          <div style="text-align:right; margin-bottom:6px;"><span style="font-size:9px; color:#059669; font-weight:600;">+ Add</span></div>
+        </div>
+
+        <div style="padding:0 12px 0;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <span style="font-size:10px; font-weight:700; color:#0F172A; text-transform:uppercase; letter-spacing:0.4px;">Lunch</span>
+            <span style="font-size:9px; color:#6b7280;">540 cal</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:5px 8px; background:#f9fafb; border-radius:8px; margin-bottom:3px;">
+            <div>
+              <div style="font-size:9px; font-weight:600; color:#0F172A;">Chicken salad</div>
+              <div style="font-size:8px; color:#9ca3af;">P 42g · C 18g · F 22g</div>
+            </div>
+            <div style="font-size:10px; font-weight:700; color:#EA580C;">540</div>
+          </div>
+          <div style="text-align:right; margin-bottom:6px;"><span style="font-size:9px; color:#059669; font-weight:600;">+ Add</span></div>
+        </div>
+
+        <div style="padding:0 12px 0;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <span style="font-size:10px; font-weight:700; color:#059669; text-transform:uppercase; letter-spacing:0.4px;">Exercise</span>
+            <span style="font-size:9px; color:#059669; font-weight:600;">-380 cal</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:5px 8px; background:#ECFDF5; border-radius:8px; margin-bottom:3px;">
+            <div>
+              <div style="font-size:9px; font-weight:600; color:#059669;">Morning run · 40min</div>
+              <div style="font-size:8px; color:#9ca3af;">Cardio</div>
+            </div>
+            <div style="font-size:10px; font-weight:700; color:#059669;">-380</div>
+          </div>
+        </div>
+
+        <div style="padding:6px 12px 0;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <span style="font-size:10px; font-weight:700; color:#0F172A; text-transform:uppercase; letter-spacing:0.4px;">Dinner</span>
+            <span style="font-size:9px; color:#6b7280;">0 cal</span>
+          </div>
+          <div style="padding:8px; background:#f9fafb; border-radius:8px; text-align:center; font-size:9px; color:#9ca3af;">Tap + Add to log dinner</div>
+        </div>
+      </div>
+
+      <!-- Bottom nav -->
+      <div style="border-top:1px solid #e5e7eb; display:flex; align-items:flex-end; justify-content:space-around; padding:5px 6px 8px; background:#fff; flex-shrink:0;">
+        <div style="text-align:center; flex:1;"><div style="font-size:16px;">🏠</div><div style="font-size:7.5px; color:#9ca3af; font-weight:500;">Home</div></div>
+        <div style="text-align:center; flex:1;"><div style="font-size:16px;">📋</div><div style="font-size:7.5px; color:#059669; font-weight:700;">Diary</div></div>
+        <div style="flex:1; display:flex; justify-content:center; align-items:flex-end;">
+          <div style="width:44px; height:44px; background:#059669; border-radius:50%; display:flex; align-items:center; justify-content:center; margin-bottom:2px; margin-top:-18px; box-shadow:0 4px 14px rgba(5,150,105,0.45); font-size:24px; color:#fff; line-height:1;">+</div>
+        </div>
+        <div style="text-align:center; flex:1;"><div style="font-size:16px;">📊</div><div style="font-size:7.5px; color:#9ca3af; font-weight:500;">History</div></div>
+        <div style="text-align:center; flex:1;"><div style="font-size:16px;">👤</div><div style="font-size:7.5px; color:#9ca3af; font-weight:500;">Profile</div></div>
+      </div>
+    </div>
+
+    <div style="font-size:13px; font-weight:700; color:#0F172A;">Diary (updated)</div>
+    <div style="font-size:11px; color:#6b7280; text-align:center;">← › swipe date strip infinitely<br>📅 calendar icon to jump to any date</div>
+  </div>
+
+</div>
+
+<!-- Unit conversion detail callout -->
+<div style="max-width:560px; margin:24px auto 0; background:#ECFDF5; border-radius:14px; padding:16px; border:1px solid #A7F3D0;">
+  <div style="font-size:13px; font-weight:700; color:#065F46; margin-bottom:8px;">Unit conversion behaviour</div>
+  <div style="font-size:12px; color:#047857; display:flex; flex-direction:column; gap:6px;">
+    <div>• Toggle <strong>lbs → kg</strong>: value converts instantly (185 lbs → 83.9 kg). Input field updates live.</div>
+    <div>• Toggle <strong>ft/in → m</strong>: 5' 11" → 1.80 m. Two ft/in fields collapse to one m field.</div>
+    <div>• If user types a value in the wrong unit before toggling, the entered number is re-interpreted and converted.</div>
+    <div>• Preference saved in SharedPreferences — the app remembers your chosen unit system across sessions.</div>
+  </div>
+</div>
+
+<div style="text-align:center; margin-top:20px; font-size:13px; color:#6b7280;">
+  Reply in terminal — any other changes, or say <strong>yes</strong> to lock everything in and write the spec.
+</div>
