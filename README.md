@@ -1,17 +1,27 @@
-# calorie_tracker
+# Calorie Tracker
 
-A new Flutter project.
+Protein-first nutrition tracker for Latin America. Built with Flutter, Supabase, and BLoC.
 
-## Getting Started
+## Stack
 
-This project is a starting point for a Flutter application.
+- Flutter (Dart ≥3.5)
+- Supabase (Auth, Postgres, Storage, Edge Functions)
+- `flutter_bloc` + `dartz` + `get_it`/`injectable` + `go_router`
+- Firebase Cloud Messaging (push notifications only)
 
-A few resources to get you started if this is your first Flutter project:
+## Getting started
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+1. Copy `.env.example` to `.env` and fill in your Supabase URL and anon key.
+2. `flutter pub get`
+3. `dart run build_runner build --delete-conflicting-outputs`
+4. `flutter run`
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Docs
+
+- `docs/DESIGN.md` — product and architecture
+- `docs/SECURITY.md` — threat model, RLS, privacy
+- `docs/MIGRATION_PLAN.md` — week-1 PR checklist
+
+## Project structure
+
+See `docs/DESIGN.md`. Follows Clean Architecture + feature-first organization.
