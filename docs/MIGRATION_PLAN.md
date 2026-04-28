@@ -1,6 +1,6 @@
 # Migration Plan — Firebase → Supabase + BLoC + Clean Architecture
 
-**Status:** In progress — PRs 1-2 completed
+**Status:** In progress — PRs 1-3 completed
 **Last updated:** 2026-04-28
 **Scope:** Week 1 of the 6-month build plan
 
@@ -11,7 +11,8 @@ This document is the concrete PR-by-PR checklist for the first week of work. It 
 - Completed:
   - **PR 1** `chore/migrate-to-supabase-stack` on 2026-04-24.
   - **PR 2** `feat/supabase-schema` on 2026-04-28.
-- Next up: **PR 3** `feat/core-infrastructure`.
+  - **PR 3** `feat/core-infrastructure` on 2026-04-28.
+- Next up: **PR 4** `feat/supabase-client`.
 - Verified in repo / Supabase on 2026-04-28:
   - `pubspec.yaml` reflects the Supabase + BLoC + Clean Architecture dependency set planned for week 1.
   - `analysis_options.yaml` and `README.md` were updated for the new stack.
@@ -85,6 +86,7 @@ This one is mostly out-of-repo (Supabase dashboard) + a migrations folder.
 ### PR 3: Core infrastructure
 
 **Branch:** `feat/core-infrastructure`
+**Status:** Completed on 2026-04-28
 
 - Create `lib/core/` folder structure per `DESIGN.md`.
 - `lib/core/error/failures.dart` — `Failure` sealed class hierarchy (`ServerFailure`, `CacheFailure`, `AuthFailure`, `ValidationFailure`, `NetworkFailure`).
