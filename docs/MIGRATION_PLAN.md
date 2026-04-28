@@ -1,10 +1,24 @@
 # Migration Plan — Firebase → Supabase + BLoC + Clean Architecture
 
-**Status:** Draft v0.1
-**Last updated:** 2026-04-20
+**Status:** In progress — PRs 1-2 completed
+**Last updated:** 2026-04-28
 **Scope:** Week 1 of the 6-month build plan
 
 This document is the concrete PR-by-PR checklist for the first week of work. It assumes a fresh start on the Firebase side (no user data to migrate — you confirmed the current Firebase project has no real users yet).
+
+## Current checkpoint
+
+- Completed:
+  - **PR 1** `chore/migrate-to-supabase-stack` on 2026-04-24.
+  - **PR 2** `feat/supabase-schema` on 2026-04-28.
+- Next up: **PR 3** `feat/core-infrastructure`.
+- Verified in repo / Supabase on 2026-04-28:
+  - `pubspec.yaml` reflects the Supabase + BLoC + Clean Architecture dependency set planned for week 1.
+  - `analysis_options.yaml` and `README.md` were updated for the new stack.
+  - `firestore.indexes.json` is gone.
+  - `firebase.json` is currently empty. That is acceptable for now because mobile FCM runtime configuration lives in the platform Firebase files; only recreate root Firebase CLI config if a later PR actually needs it.
+  - `supabase/migrations/0001_initial_schema.sql`, `0002_rls_policies.sql`, and `0003_triggers_and_functions.sql` exist in the repo and were pushed successfully to the linked Supabase project.
+  - `.env.example` exists and `supabase/.temp/` is gitignored.
 
 ## Week 1 goal
 
@@ -24,6 +38,7 @@ Each bullet is a standalone PR. Keep PRs small and atomic — OptiGasto conventi
 ### PR 1: Repo hygiene and dependency swap
 
 **Branch:** `chore/migrate-to-supabase-stack`
+**Status:** Completed on 2026-04-24
 
 - Delete `cloud_firestore`, `firebase_auth`, `provider`, `shared_preferences` from `pubspec.yaml`.
 - Add: `supabase_flutter`, `flutter_bloc`, `bloc`, `dartz`, `get_it`, `injectable`, `freezed_annotation`, `go_router`, `flutter_secure_storage`, `equatable`.
@@ -31,13 +46,14 @@ Each bullet is a standalone PR. Keep PRs small and atomic — OptiGasto conventi
 - Keep: `firebase_core`, `firebase_messaging`, `fl_chart`, `google_fonts`, `flutter_dotenv`, `google_sign_in`, `sign_in_with_apple`, `flutter_local_notifications`, `timezone`, `http`, `cupertino_icons`.
 - Update `analysis_options.yaml` to match OptiGasto's lint rules.
 - Delete `firestore.indexes.json`.
-- Keep `firebase.json` but clean out Firestore config; retain only Cloud Messaging.
+- Remove Firestore config from `firebase.json`. If the root Firebase CLI config is otherwise unused, leaving it empty for now is acceptable; mobile FCM still depends on the platform Firebase files.
 - Update `README.md` to reflect new stack.
 - `flutter pub get`, verify build.
 
 ### PR 2: Supabase project setup and schema
 
 **Branch:** `feat/supabase-schema`
+**Status:** Completed on 2026-04-28
 
 This one is mostly out-of-repo (Supabase dashboard) + a migrations folder.
 
@@ -172,15 +188,13 @@ Bigger than the splits above, but profile is tightly coupled to TDEE computation
 - **Don't commit `.env`.** Always check `git status` before committing when working near config.
 - **Don't skip the CHECK constraints.** It's tempting to push them to a later migration; they're part of the threat model.
 
-## Dependencies on external decisions
+## External decisions status
 
-Before starting PR 1, resolve:
-
-- [ ] Supabase region choice (US-East assumed).
+- [x] Supabase region choice locked to US-East.
 - [ ] Supabase tier (Free for dev, Pro before launch — budget decision).
-- [ ] Whether to use Supabase Auth's built-in OAuth or `google_sign_in` + `sign_in_with_apple` packages with custom token exchange (recommend: built-in Supabase OAuth for simplicity).
+- [x] OAuth approach locked to native flows with `google_sign_in` + `sign_in_with_apple` and Supabase `signInWithIdToken`.
 - [ ] App bundle IDs (`com.flechaverde.calorietracker.dev` vs prod).
-- [ ] Firebase project — create a new one or reuse the existing calorie-tracker Firebase project? Recommend: keep existing, just strip Firestore/Auth usage.
+- [x] Firebase project reuse locked to the existing calorie-tracker Firebase project.
 
 ## Definition of "week 1 done"
 
