@@ -1,10 +1,12 @@
 # Calorie Tracker — Complete Technical Plan
 
 **Status:** Authoritative reference document
-**Last updated:** 2026-04-23
+**Last updated:** 2026-04-28
 **Purpose:** Self-contained build plan that can be executed PR-by-PR without external guidance.
 
-This document consolidates everything needed to build the Calorie Tracker app from current state (Firebase scaffold) to public app store launch. Keep it in `docs/TECHNICAL_PLAN.md` in the repo and update it as decisions change.
+This document consolidates everything needed to build the Calorie Tracker app from the current migration checkpoint (PRs 1-2 complete) to public app store launch. Keep it in `docs/TECHNICAL_PLAN.md` in the repo and update it as decisions change.
+
+> Execution checkpoint as of 2026-04-28: `docs/MIGRATION_PLAN.md` PRs 1-2 are complete and verified. Treat PR 3 `feat/core-infrastructure` as the next implementation step.
 
 ---
 
@@ -1305,10 +1307,10 @@ Each PR should be reviewable in ≤30 minutes, follow Conventional Commits, and 
 
 ### Month 1: Foundation (Weeks 1-4)
 
-#### Week 1: Migrate stack (PRs 1-9)
+#### Week 1: Migrate stack (PRs 1-9; PRs 1-2 complete)
 
-- **PR 1** `chore/migrate-to-supabase-stack` — deps swap, remove Firestore/Firebase Auth/Provider/SharedPreferences, add Supabase/BLoC/dartz/get_it/injectable/freezed/go_router/flutter_secure_storage
-- **PR 2** `feat/supabase-schema` — create Supabase project, write 3 migrations (schema/RLS/triggers), apply via CLI
+- **PR 1** `chore/migrate-to-supabase-stack` — deps swap, remove Firestore/Firebase Auth/Provider/SharedPreferences, add Supabase/BLoC/dartz/get_it/injectable/freezed/go_router/flutter_secure_storage. Completed on 2026-04-24.
+- **PR 2** `feat/supabase-schema` — create Supabase project, write 3 migrations (schema/RLS/triggers), apply via CLI. Completed on 2026-04-28.
 - **PR 3** `feat/core-infrastructure` — `lib/core/` folder, failures, usecases, DI config, router skeleton, theme, constants, utils
 - **PR 4** `feat/supabase-client` — Supabase singleton, secure storage wrapper, `.env` loading, init in `main.dart`
 - **PR 5** `feat/auth-domain-data` — auth entity, repository interface, use cases, remote datasource, model, repo impl
