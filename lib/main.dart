@@ -8,19 +8,10 @@ import 'core/theme/app_theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
-  // Load environment variables
   await dotenv.load();
-  
-  // Initialize secure storage
   final secureStorage = SecureStorageService();
-  
-  // Initialize Supabase with secure storage for auth persistence
   await SupabaseClientService.initialize(secureStorage: secureStorage);
-  
-  // Configure dependency injection
   await configureDependencies();
-  
   runApp(const CalorieTrackerApp());
 }
 

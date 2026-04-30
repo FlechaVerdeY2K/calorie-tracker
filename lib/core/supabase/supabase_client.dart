@@ -111,4 +111,3 @@ class SecureLocalStorage extends LocalStorage {
   static const String _persistSessionKey = 'supabase.auth.session';
 }
 
-// Made with Bob
