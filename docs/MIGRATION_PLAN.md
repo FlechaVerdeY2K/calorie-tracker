@@ -1,7 +1,7 @@
 # Migration Plan — Firebase → Supabase + BLoC + Clean Architecture
 
-**Status:** In progress — PRs 1-3 completed
-**Last updated:** 2026-04-28
+**Status:** In progress — PRs 1-4 completed
+**Last updated:** 2026-04-30
 **Scope:** Week 1 of the 6-month build plan
 
 This document is the concrete PR-by-PR checklist for the first week of work. It assumes a fresh start on the Firebase side (no user data to migrate — you confirmed the current Firebase project has no real users yet).
@@ -12,14 +12,18 @@ This document is the concrete PR-by-PR checklist for the first week of work. It 
   - **PR 1** `chore/migrate-to-supabase-stack` on 2026-04-24.
   - **PR 2** `feat/supabase-schema` on 2026-04-28.
   - **PR 3** `feat/core-infrastructure` on 2026-04-28.
-- Next up: **PR 4** `feat/supabase-client`.
-- Verified in repo / Supabase on 2026-04-28:
+  - **PR 4** `feat/supabase-client` on 2026-04-30.
+- Next up: **PR 5** `feat/auth-domain-data`.
+- Verified in repo / Supabase on 2026-04-30:
   - `pubspec.yaml` reflects the Supabase + BLoC + Clean Architecture dependency set planned for week 1.
   - `analysis_options.yaml` and `README.md` were updated for the new stack.
   - `firestore.indexes.json` is gone.
   - `firebase.json` is currently empty. That is acceptable for now because mobile FCM runtime configuration lives in the platform Firebase files; only recreate root Firebase CLI config if a later PR actually needs it.
   - `supabase/migrations/0001_initial_schema.sql`, `0002_rls_policies.sql`, and `0003_triggers_and_functions.sql` exist in the repo and were pushed successfully to the linked Supabase project.
   - `.env.example` exists and `supabase/.temp/` is gitignored.
+  - `lib/core/supabase/supabase_client.dart` and `lib/core/secure_storage/secure_storage_service.dart` implemented with secure auth token persistence.
+  - Supabase client initialization integrated into `main.dart` with proper initialization sequence.
+  - All tests passing (33 tests including 8 new Supabase client tests).
 
 ## Week 1 goal
 
@@ -105,12 +109,15 @@ This one is mostly out-of-repo (Supabase dashboard) + a migrations folder.
 ### PR 4: Supabase client initialization
 
 **Branch:** `feat/supabase-client`
+**Status:** Completed on 2026-04-30
 
-- `lib/core/supabase/supabase_client.dart` — singleton wrapper around `Supabase.initialize()`.
-- `lib/core/secure_storage/secure_storage_service.dart` — wrapper around `flutter_secure_storage`.
-- Configure `Supabase.initialize()` with secure storage for auth persistence (via `localStorage: SecureLocalStorage()` custom implementation, OR verify the default is secure on both platforms — test on physical device).
-- Update `main.dart` to init Supabase before `runApp`.
-- `.env` loading via `flutter_dotenv` — verify `SUPABASE_URL` and `SUPABASE_ANON_KEY` load correctly.
+- ✅ `lib/core/supabase/supabase_client.dart` — singleton wrapper around `Supabase.initialize()`.
+- ✅ `lib/core/secure_storage/secure_storage_service.dart` — wrapper around `flutter_secure_storage`.
+- ✅ Configure `Supabase.initialize()` with secure storage for auth persistence via custom `SecureLocalStorage()` implementation.
+- ✅ Update `main.dart` to init Supabase before `runApp`.
+- ✅ `.env` loading via `flutter_dotenv` — `SUPABASE_URL` and `SUPABASE_ANON_KEY` load correctly.
+- ✅ Unit tests added with 8 test cases, all passing.
+- ✅ `flutter analyze` passes with no issues.
 
 ### PR 5: Auth feature — domain + data layers
 
