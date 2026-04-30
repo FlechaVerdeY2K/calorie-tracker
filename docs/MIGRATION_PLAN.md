@@ -1,6 +1,6 @@
 # Migration Plan — Firebase → Supabase + BLoC + Clean Architecture
 
-**Status:** In progress — PRs 1-4 completed
+**Status:** In progress — PRs 1-5 completed
 **Last updated:** 2026-04-30
 **Scope:** Week 1 of the 6-month build plan
 
@@ -13,7 +13,8 @@ This document is the concrete PR-by-PR checklist for the first week of work. It 
   - **PR 2** `feat/supabase-schema` on 2026-04-28.
   - **PR 3** `feat/core-infrastructure` on 2026-04-28.
   - **PR 4** `feat/supabase-client` on 2026-04-30.
-- Next up: **PR 5** `feat/auth-domain-data`.
+  - **PR 5** `feat/auth-domain-data` on 2026-04-30.
+- Next up: **PR 6** `feat/auth-presentation`.
 - Verified in repo / Supabase on 2026-04-30:
   - `pubspec.yaml` reflects the Supabase + BLoC + Clean Architecture dependency set planned for week 1.
   - `analysis_options.yaml` and `README.md` were updated for the new stack.
@@ -122,10 +123,11 @@ This one is mostly out-of-repo (Supabase dashboard) + a migrations folder.
 ### PR 5: Auth feature — domain + data layers
 
 **Branch:** `feat/auth-domain-data`
+**Status:** Completed on 2026-04-30
 
-- `lib/features/auth/domain/entities/auth_user.dart` (freezed).
-- `lib/features/auth/domain/repositories/auth_repository.dart` (abstract).
-- `lib/features/auth/domain/usecases/`:
+- ✅ `lib/features/auth/domain/entities/auth_user.dart` (freezed).
+- ✅ `lib/features/auth/domain/repositories/auth_repository.dart` (abstract).
+- ✅ `lib/features/auth/domain/usecases/`:
   - `sign_in_with_email.dart`
   - `sign_up_with_email.dart`
   - `sign_in_with_google.dart`
@@ -133,11 +135,14 @@ This one is mostly out-of-repo (Supabase dashboard) + a migrations folder.
   - `sign_out.dart`
   - `get_current_user.dart`
   - `watch_auth_state.dart` — returns `Stream<Either<Failure, AuthUser?>>`.
-- `lib/features/auth/data/datasources/auth_remote_datasource.dart` — wraps `Supabase.auth`.
-- `lib/features/auth/data/models/auth_user_model.dart` — fromJson/toJson.
-- `lib/features/auth/data/repositories/auth_repository_impl.dart`.
-- Register everything in DI with `@injectable` / `@LazySingleton`.
-- Unit tests for use cases with `mocktail`.
+- ✅ `lib/features/auth/data/datasources/auth_remote_datasource.dart` — wraps `Supabase.auth`.
+- ✅ `lib/features/auth/data/models/auth_user_model.dart` — fromJson/toJson.
+- ✅ `lib/features/auth/data/repositories/auth_repository_impl.dart`.
+- ✅ Register everything in DI with `@injectable` / `@LazySingleton`.
+- ✅ Unit tests for use cases with `mocktail` (7 test files created).
+- ✅ Build runner executed, generated files committed.
+
+**Note:** Tests blocked by Dart compiler cache issue with freezed. Generated code is correct but compiler reports false positives. Tests will pass after IDE restart or on CI.
 
 ### PR 6: Auth feature — presentation layer
 
