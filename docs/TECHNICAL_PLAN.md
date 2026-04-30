@@ -1307,12 +1307,12 @@ Each PR should be reviewable in ≤30 minutes, follow Conventional Commits, and 
 
 ### Month 1: Foundation (Weeks 1-4)
 
-#### Week 1: Migrate stack (PRs 1-9; PRs 1-3 complete)
+#### Week 1: Migrate stack (PRs 1-9; PRs 1-4 complete)
 
 - **PR 1** `chore/migrate-to-supabase-stack` — deps swap, remove Firestore/Firebase Auth/Provider/SharedPreferences, add Supabase/BLoC/dartz/get_it/injectable/freezed/go_router/flutter_secure_storage. Completed on 2026-04-24.
 - **PR 2** `feat/supabase-schema` — create Supabase project, write 3 migrations (schema/RLS/triggers), apply via CLI. Completed on 2026-04-28.
 - **PR 3** `feat/core-infrastructure` — `lib/core/` folder, failures, usecases, DI config, router skeleton, theme, constants, utils. Completed on 2026-04-28.
-- **PR 4** `feat/supabase-client` — Supabase singleton, secure storage wrapper, `.env` loading, init in `main.dart`
+- **PR 4** `feat/supabase-client` — Supabase singleton, secure storage wrapper, `.env` loading, init in `main.dart`. Completed on 2026-04-30.
 - **PR 5** `feat/auth-domain-data` — auth entity, repository interface, use cases, remote datasource, model, repo impl
 - **PR 6** `feat/auth-presentation` — AuthBloc, sign-in/sign-up/forgot-password pages, social buttons, router wiring
 - **PR 7** `feat/profile` — complete profile feature including onboarding flow
