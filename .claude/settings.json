@@ -1,7 +1,7 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git -C /Users/edgarherrera/MyApps/calorie-tracker log --oneline -15)"
+      "Bash(git -C /Users/edgarherrera/MyApps/calorie-tracker log --oneline -15)",
       "Read(//Users/edgarherrera/.claude/plugins/**)",
       "Bash(bash \"/Users/edgarherrera/.claude/plugins/cache/superpowers-dev/superpowers/5.0.7/scripts/start-server.sh\" --project-dir /Users/edgarherrera/MyApps/calorie-tracker)",
       "Bash(bash \"/Users/edgarherrera/.claude/plugins/cache/superpowers-dev/superpowers/5.0.7/skills/brainstorming/scripts/start-server.sh\" --project-dir /Users/edgarherrera/MyApps/calorie-tracker)",
