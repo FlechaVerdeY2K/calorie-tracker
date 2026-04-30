@@ -7,12 +7,6 @@ class MockSecureStorageService extends Mock implements SecureStorageService {}
 
 void main() {
   group('SupabaseClientService', () {
-    late MockSecureStorageService mockSecureStorage;
-
-    setUp(() {
-      mockSecureStorage = MockSecureStorageService();
-    });
-
     test('isInitialized returns false before initialization', () {
       expect(SupabaseClientService.isInitialized, false);
     });
